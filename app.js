@@ -1,15 +1,25 @@
-const btn = document.querySelector(".btn")
-const coupon = document.querySelector(".coupon")
+const timeEl = document.querySelector(".time");
+const btnToggle = document.querySelector(".toggle");
 
-btn.addEventListener("click",(e)=>{
-    coupon.select
-    coupon.setSelectionRange(0,9999)
-    navigator.clipboard.writeText(coupon.value)
-    btn.textContent = "คัดลอกคูปองเเล้ว!!!!"
-    btn.style.backgroundColor = "#4CAF50";
+function setTime() {
+  const time = new Date();
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const seconds = time.getSeconds();
 
-    setTimeout(()=>{
-        btn.textContent = "คัดดลอก"
-        btn.style.backgroundColor = "rgb(207, 12, 152)";
-    },2000)
+  timeEl.innerHTML = `${hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}
+
+btnToggle.addEventListener("click",(e)=>{
+    const html = document.querySelector('html')
+    if(html.classList.contains("dark")){
+        html.classList.remove("dark")
+        e.target.innerHTML="Dark Mode"
+    }else{
+        html.classList.add("dark")
+        e.target.innerHTML="Light Mode"
+    }
 })
+
+setTime(); 
+setInterval(setTime, 1000);
